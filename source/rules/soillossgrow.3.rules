@@ -1,0 +1,4 @@
+-1 = -1 # reclassify rules from ERK2, 3 classes, divided by 10
+0 thru 3 = 2 keine Gefährdung
+3 thru 5.5 = 4 Gefährdung
+5.5 thru 5000 = 6 hohe Gefährdung

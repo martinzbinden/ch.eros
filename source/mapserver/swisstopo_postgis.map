@@ -1,0 +1,135 @@
+LAYER
+    name            tindex.pk25
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA            "wkb_geometry from tindex.ch_swisstopo_pk25 using unique ogc_fid"
+END
+
+
+LAYER
+    NAME            ch.swisstopo.pk25
+    #GROUP           "ch.swisstopo"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       tindex.pk25
+    METADATA
+        "ows_title"             "ch.swisstopo.pk25"
+        "ows_label"             "ch.swisstopo.pk25"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        "1.25 1.25"
+        "wms_layer_group"           "/ch.swisstopo"    #alternative to #GROUP
+        "wms_enable_request"    "*"
+    END
+END
+
+
+LAYER
+    name            tindex.swissimage
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA            "wkb_geometry from tindex.ch_swisstopo_swissimage_2007"
+END
+LAYER
+    NAME            ch.swisstopo.swissimage.2007
+    #GROUP           "ch.swisstopo"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       "tindex.swissimage"
+    METADATA
+        "ows_title"             "ch.swisstopo.swissimage.2007"
+        "ows_label"             "ch.swisstopo.swissimage.2007"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        ".5 .5"
+        "ows_enable_request"    "*"
+        "wms_layer_group"           "/ch.swisstopo"    #alternative to #GROUP
+    END
+END
+
+LAYER
+    name            tindex.swissalti3d
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA            "wkb_geometry from tindex.ch_swisstopo_swissalti3d using unique ogc_fid using srid=21781"
+END
+LAYER
+    NAME            ch.swisstopo.swissalti3d
+    GROUP           "ch.swisstopo"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       "tindex.swissalti3d"
+    TEMPLATE        "default"
+    METADATA
+        "ows_title"             "ch.swisstopo.swissalti3d"
+        "ows_label"             "ch.swisstopo.swissalti3d"
+        #"wms_opaque"            "1"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        "2 2"
+        "wcs_formats"           "GEOTIFF_FLOAT32"
+        #"wms_layer_group"        "/ch.swisstopo"    #alternative to #GROUP
+        "wcs_enable_request"    "*"
+        "gml_include_items"     "value_0"
+        "gml_#GROUPs"            "meters"
+        "gml_meters_#GROUP"      "value_0"
+    END
+END
+
+LAYER
+    name                    tindex.swissalti3d.hillshade
+    TYPE                    POLYGON
+    STATUS                  OFF
+    CONNECTIONTYPE          POSTGIS
+    PROCESSING              "CLOSE_CONNECTION=DEFER"
+    CONNECTION              "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA                    "wkb_geometry from tindex.ch_swisstopo_swissalti3d_hillshade using unique ogc_fid using srid=21781"
+END
+LAYER
+    NAME                    ch.swisstopo.swissalti3d.hillshade
+    #GROUP                   "ch.swisstopo"
+    TYPE                    RASTER
+    STATUS                  ON
+    TILEINDEX               "tindex.swissalti3d.hillshade"
+    METADATA
+        "ows_label"                 "ch.swisstopo.swissalti3d.hillshade"  ### required
+        "ows_title"                 "ch.swisstopo.swissalti3d.hillshade"  ### required
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+    "wcs_formats"       "GEOTIFF_FLOAT32"
+        "wms_enable_request"        "*"
+        "wms_layer_group"           "/ch.swisstopo"    #alternative to #GROUP
+    END
+END
+
+LAYER
+    name                    tindex.swissalti3d.colorhillshade
+    TYPE                    POLYGON
+    STATUS                  OFF
+    CONNECTIONTYPE          POSTGIS
+    PROCESSING              "CLOSE_CONNECTION=DEFER"
+    CONNECTION              "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA                    "wkb_geometry from tindex.ch_swisstopo_swissalti3d_colorhillshade using unique ogc_fid using srid=21781"
+END
+LAYER
+    NAME                    ch.swisstopo.swissalti3d.colorhillshade
+    #GROUP                   "ch.swisstopo"
+    TYPE                    RASTER
+    STATUS                  ON
+    TILEINDEX               "tindex.swissalti3d.colorhillshade"
+    METADATA
+        "ows_label"                 "ch.swisstopo.swissalti3d.colorhillshade"  ### required
+        "ows_title"                 "ch.swisstopo.swissalti3d.colorhillshade"  ### required
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+        "wms_layer_group"           "/ch.swisstopo"    #alternative to #GROUP
+    END
+END

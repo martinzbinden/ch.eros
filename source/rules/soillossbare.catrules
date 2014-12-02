@@ -1,0 +1,9 @@
+0:10 1 keine Gefährdung
+10:20 2 keine Gefährdung
+20:30 3 keine Gefährdung
+30:55 4 Gefährdung
+55:100 5 Gefährdung
+100:150 6 grosse Gefährdung
+150:250 7 grosse Gefährdung
+250:500 8 grosse Gefährdung
+500:5000 grosse Gefährdung

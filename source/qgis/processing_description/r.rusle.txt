@@ -1,0 +1,8 @@
+r.rusle.py
+r.rusle.py - Construction of flowline densities (upslope areas) and resulting annual soil loss using RUSLE3D from a raster digital elevation model (DEM) and rasters with RUSLE-factors.
+Raster (r.*)
+ParameterRaster|elevation|Elevation|False
+ParameterRaster|barrier|Barriers|False
+ParameterNumber|resolution|Resolution of elevation map|None|None|2.0
+ParameterBoolean|-r|Remove intermediary results|False
+OutputRaster|soillossout|Output flowline density raster layer

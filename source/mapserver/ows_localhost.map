@@ -1,0 +1,74 @@
+MAP
+    WEB
+        METADATA
+            "ows_title"                     "523.riedackerhof.ch mapserv"
+            "ows_abstract"                  "Mapserver for ERK2+ project (BTh)"
+            "ows_keywordlist"               "gis erosion BLW"
+            "ows_onlineresource"            "http://localhost:80/ows?"
+            #"ows_service_onlineresource"   "http://localhost/mapserv?"
+            "ows_contactorganization"       "BFH HAFL Zollikofen"
+            "ows_contactperson"             "martin.zbinden@gmail.com"
+            "ows_srs"                       "epsg:21781"  ##recommended
+            "ows_enable_request"            "* !GetCapabilities"
+        END ## Metadata
+    END ## Web
+
+    NAME        "mapserv"
+    #CONFIG      "MS_ERRORFILE" "/var/log/mapserv_error.log"
+    PROJECTION
+        "init=epsg:21781"
+    END
+    EXTENT      480000 74000 838750 296000
+    SHAPEPATH   "/gis/geodata/"
+
+
+    OUTPUTFORMAT
+        NAME GTiff
+        DRIVER "GDAL/GTiff"
+        MIMETYPE "image/tiff"
+        IMAGEMODE RGB
+    EXTENSION "tif"
+    END
+    OUTPUTFORMAT
+        NAME GEOTIFF_FLOAT32
+        DRIVER "GDAL/GTiff"
+        TRANSPARENT ON
+        MIMETYPE "image/tiff"
+        IMAGEMODE FLOAT32
+        EXTENSION "tif"
+    END
+    OUTPUTFORMAT
+        NAME GEOTIFF_INT8
+        DRIVER "GDAL/GTiff"
+        TRANSPARENT ON
+        MIMETYPE "image/tiff"
+        IMAGEMODE BYTE
+        EXTENSION "tif"
+    END
+
+    # hilite map for GetFeatureInfo "info_format=text/html" requests
+    QUERYMAP
+        STATUS ON
+        SIZE 200 200
+        STYLE HILITE
+        COLOR 255 255 0
+    END
+
+ # set defaults for GetLegendGraphic requests
+    LEGEND
+        LABEL
+            TYPE BITMAP
+            SIZE MEDIUM
+            COLOR 0 0 0
+        END
+    END
+
+
+INCLUDE     "swisstopo.map"
+INCLUDE     "blw.map"
+
+
+
+END #Map file
+
+

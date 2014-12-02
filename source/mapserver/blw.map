@@ -1,0 +1,276 @@
+LAYER
+    NAME            ch.gelan.kulturen.2014
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    CONNECTION "host=localhost port=5432 dbname='gis' user='map' password='mapmap'"
+    DATA "geom from ch_gelan_kulturen_2014 using srid=21781"
+    METADATA
+        "ows_title"                 "ch.gelan.kulturen.2014_provisorisch"
+        "ows_label"                 "ch.gelan.kulturen.2014_provisorisch"
+        "ows_extent"                "480000 74000  838750 296000"
+	"wms_enable_request"	"*"
+	"wfs_enable_request"	"*"
+        "wms_layer_group"           "/ch.gelan"
+	"wcs_enable_request" ""
+    END
+    CLASS
+        #expression ("[FIPS]" = "EZ")
+            style
+                color 255 0 0
+            end
+    END
+END
+LAYER
+    NAME            ch.blw.erk2.feldblockkarte
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    CONNECTION "host=localhost port=5432 dbname='gis' user='map' password='mapmap'"
+    DATA "geom from ch_blw_erk2_feldblockkarte using srid=21781"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.feldblockkarte"
+        "ows_label"                 "ch.blw.erk2.feldblockkarte"
+        "ows_extent"                "480000 74000  838750 296000"
+    	"wms_enable_request"        "*"
+    	"wfs_enable_request"        "*"
+        "wms_layer_group"           "/ch.blw.erk2"
+	"wcs_enable_request" ""
+    END
+    CLASS
+    	STYLE
+		WIDTH 2
+		OUTLINECOLOR 0 0 0
+	END
+    END
+
+END
+
+LAYER
+    NAME            ch.gelan.fff.2014_provisorisch
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    CONNECTION "host=localhost port=5432 dbname='gis' user='map' password='mapmap'"
+    DATA "geom from provisorisch_fff using srid=21781"
+    METADATA
+        "ows_title"                 "ch.gelan.fff.2014_provisorisch"
+        "ows_label"                 "ch.gelan.fff.2014_provisorisch"
+        "ows_extent"                "480000 74000  838750 296000"
+    	"wms_enable_request"        "*"
+    	"wfs_enable_request"        "*"
+        "wms_layer_group"           "/ch.gelan"
+	"wcs_enable_request"  ""
+    END
+    CLASS
+        #expression ("[FIPS]" = "EZ")
+    	style
+	color 255 0 0
+    	end
+    END
+END
+
+LAYER
+    NAME        "ch.blw.erk2.erosz"
+    TYPE        RASTER
+    STATUS      ON
+    TEMPLATE    "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.erosz"
+        "ows_label"                 "ch.blw.erk2.erosz"
+        "wms_layer_group"           "/ch.blw.erk2"
+        "ows_resolution"            "2 2"
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_enable_request"        "*"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "wcs_rangeset_name"    "Range1"
+        "wcs_rangeset_label"    "My Label"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "gml_include_items"         "value_0"
+        #"wms_style"                 "erosz"
+        #"wms_style_erosz_legendurl_format"  "png"
+        #"wms_style_erosz_legendurl_height"  "214"
+        #"wms_style_erosz_legendurl_width"   "104"
+        #"wms_style_erosz_legendurl_href"    "ch.blw.erosion-quantitativ_de_legend.png"
+    END
+    PROJECTION
+      "init=epsg:21781"
+    END
+    TILEINDEX   tindex/erosz/erosz
+    CLASS
+        EXPRESSION ([pixel] <= 20)
+        STYLE
+        COLOR 0 102 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 20 AND [pixel] <= 30)
+        STYLE
+        COLOR 51 153 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 30 AND [pixel] <= 40)
+        STYLE
+        COLOR 204 255 0
+        END
+    END
+
+    CLASS
+        EXPRESSION ([pixel] > 40 AND [pixel] <= 55)
+        STYLE
+        COLOR 255 255 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 55 AND [pixel] <= 100)
+        STYLE
+        COLOR 255 102 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 100 AND [pixel] <= 150)
+        STYLE
+        COLOR 255 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 150 AND [pixel] <= 250)
+        STYLE
+        COLOR 204 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 250 AND [pixel] <= 500)
+        STYLE
+        COLOR 153 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 500)
+        STYLE
+        COLOR 102 0 0
+        END
+    END
+END
+
+LAYER
+    NAME        "ch.blw.erk2.erosz.fff_provisorisch"
+    TYPE        RASTER
+    STATUS      ON
+    TILEINDEX   tindex/erosz/erosz
+    TEMPLATE    "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.erosz.fff_provisorisch"
+        "ows_label"                 "ch.blw.erk2.erosz.fff_provisorisch"
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+        "wms_layer_group"           "/ch.blw.erk2"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "gml_include_items"         "value_0"
+    END
+    MASK    "ch.gelan.fff.2014_provisorisch"
+    CLASS
+        EXPRESSION ([pixel] <= 20)
+        STYLE
+        COLOR 0 102 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 20 AND [pixel] <= 30)
+        STYLE
+        COLOR 51 153 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 30 AND [pixel] <= 40)
+        STYLE
+        COLOR 204 255 0
+        END
+    END
+
+    CLASS
+        EXPRESSION ([pixel] > 40 AND [pixel] <= 55)
+        STYLE
+        COLOR 255 255 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 55 AND [pixel] <= 100)
+        STYLE
+        COLOR 255 102 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 100 AND [pixel] <= 150)
+        STYLE
+        COLOR 255 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 150 AND [pixel] <= 250)
+        STYLE
+        COLOR 204 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 250 AND [pixel] <= 500)
+        STYLE
+        COLOR 153 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] > 500)
+        STYLE
+        COLOR 102 0 0
+        END
+    END
+END
+
+LAYER
+    NAME            "ch.blw.erk2.r"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       tindex/r/r
+    TEMPLATE        "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.r"
+        "ows_label"                 "ch.blw.erk2.r"
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+        "wms_layer_group"           "/ch.blw.erk2"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "wcs_rangeset_name"    "Range1"
+        "wcs_rangeset_label"    "My Label"
+        "gml_include_items"         "value_0"
+    END
+END
+
+
+LAYER
+    NAME            "ch.blw.erk2.k"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       tindex/k/k
+    TEMPLATE        "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.k"
+        "ows_label"                 "ch.blw.erk2.k"
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+        "wms_layer_group"           "/ch.blw.erk2"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "wcs_rangeset_name"    "Range1"
+        "wcs_rangeset_label"    "My Label"
+        "gml_include_items"         "value_0"
+    END
+END #Layer

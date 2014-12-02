@@ -1,0 +1,44 @@
+<tinyows online_resource="http://localhost/wfs"
+schema_dir="/usr/share/tinyows/schema/"
+estimated_extent = "1" >
+
+<pg host="localhost"
+user="mapserv"
+password="mapmap"
+dbname="gis"
+port="5432"/>
+
+<limits features="5000" />
+
+<metadata name="523.riedackerhof.ch tinyows"
+title="523.riedackerhof.ch"/>
+
+<layer name="root"
+retrievable="1"
+ns_prefix="tows"
+ns_uri="http://www.tinyows.org/"
+schema="public" >
+
+    <layer name="ch_blw_erk2_feldblockkarte"
+    title="ch.blw.erk2.Feldblockkarte"
+    writable="0"/>
+
+
+    <layer name="dauerkulturen2014"
+    title="ch.gelan.dauerkulturen.2014"
+    writable="0" />
+
+    <layer name="ebk_parzellen"
+    title="Parzellen"
+    writable="1" />
+
+    <layer name="ebk_massnahmen"
+    title="Massnahmen"
+    writable="1" />
+
+</layer>
+
+</tinyows>
+
+
+

@@ -1,0 +1,88 @@
+LAYER
+    NAME            ch.swisstopo.pk25
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       tindex/pk25/pk25
+    METADATA
+        "ows_title"             "ch.swisstopo.pk25"
+        "ows_label"             "ch.swisstopo.pk25"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        "1.25 1.25"
+        "wms_layer_group"       "/ch.swisstopo"
+        "wms_enable_request"    "*"
+    END
+END
+
+
+LAYER
+    NAME            ch.swisstopo.swissimage.1998
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       tindex/swissimage2004/swissimage2004
+    METADATA
+        "ows_title"             "ch.swisstopo.swissimage.2004"
+        "ows_label"             "ch.swisstopo.swissimage.2004"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        ".5 .5"
+        "ows_enable_request"    "*"
+        "wms_layer_group"       "/ch.swisstopo"
+    END
+END
+
+
+LAYER
+    NAME            ch.swisstopo.swissalti3d
+    GROUP           "ch.swisstopo"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       "tindex/swissalti3d/swissalti3d"
+    TEMPLATE        "default"
+    METADATA
+        "ows_title"             "ch.swisstopo.swissalti3d"
+        "ows_label"             "ch.swisstopo.swissalti3d"
+        #"wms_opaque"            "1"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        "2 2"
+        "wcs_formats"           "GEOTIFF_FLOAT32"
+	"wcs_rangeset_name"	"Range1"
+	"wcs_rangeset_label"	"My Label"
+        #"wms_layer_group"        "/ch.swisstopo"
+        "wcs_enable_request"    "*"
+        "gml_include_items"     "value_0"
+        "gml_#GROUPs"            "meters"
+        "gml_meters_#GROUP"      "value_0"
+    END
+END
+
+LAYER
+    NAME                    ch.swisstopo.swissalti3d.hillshade
+    #GROUP                   "ch.swisstopo"
+    TYPE                    RASTER
+    STATUS                  ON
+    TILEINDEX               tindex/hillshade/hillshade
+    METADATA
+        "ows_label"                 "ch.swisstopo.swissalti3d.hillshade"  ### required
+        "ows_title"                 "ch.swisstopo.swissalti3d.hillshade"  ### required
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+    "wcs_formats"       "GEOTIFF_FLOAT32"
+        "wms_enable_request"        "*"
+        "wms_layer_group"           "/ch.swisstopo"    #alternative to #GROUP
+    END
+END
+
+LAYER
+    NAME                    ch.swisstopo.swissalti3d.colorhillshade
+    TYPE                    RASTER
+    STATUS                  ON
+    TILEINDEX               tindex/chillshade/chillshade
+    METADATA
+        "ows_label"                 "ch.swisstopo.swissalti3d.colorhillshade"  ### required
+        "ows_title"                 "ch.swisstopo.swissalti3d.colorhillshade"  ### required
+        "ows_extent"                "480000 74000 838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+        "wms_layer_group"           "/ch.swisstopo"    #alternative to #GROUP
+    END
+END

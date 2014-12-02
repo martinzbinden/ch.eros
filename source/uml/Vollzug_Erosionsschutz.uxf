@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.custom.Systemborder</type>
+    <coordinates>
+      <x>20</x>
+      <y>300</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>4 Kontrolle Umsetzung 
+und Wirkung durch BSF</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Systemborder</type>
+    <coordinates>
+      <x>20</x>
+      <y>230</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>3 Erarbeitung Massnahmenplan
+mit Bewirtschafter und BSF</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Systemborder</type>
+    <coordinates>
+      <x>20</x>
+      <y>90</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>1 Meldung Erosionsereignis
+an Bodenschutzfachstelle (BSF)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Systemborder</type>
+    <coordinates>
+      <x>20</x>
+      <y>160</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>2 Erhebung vor Ort 
+durch BSF</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>100</x>
+      <y>110</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>100</x>
+      <y>180</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>100</x>
+      <y>250</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>*Vollzug Erosionsschutz*
+valign=center
+halign=center
+fontsize=16
+lth=2.5</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

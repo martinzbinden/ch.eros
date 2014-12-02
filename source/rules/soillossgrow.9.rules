@@ -1,0 +1,10 @@
+-1 = -1 # reclassify rules from ERK2, divided by 10
+0 thru 2 = 1 <2 
+2 thru 3 = 2 2 - 3
+3 thru 4 = 3 3 - 4 
+4 thru 5.5 = 4 4 - 5.5
+5.5 thru 10 = 5 5.5 - 10
+10 thru 15 = 6 10 - 15
+15 thru 25 = 7 15 - 25
+25 thru 50 = 8  25 - 50
+50 thru 5000 = 9  >50

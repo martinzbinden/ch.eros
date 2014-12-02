@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.custom.Systemborder</type>
+    <coordinates>
+      <x>160</x>
+      <y>150</y>
+      <w>600</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>Fachprogramm Erosionsberatung</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>290</x>
+      <y>210</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Untersuchungsgebiet 
+festlegen
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>290</x>
+      <y>480</y>
+      <w>180</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Massnahmen erfassen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>510</x>
+      <y>350</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Bodenabtrag auf Ackerland
+berechnen &amp; darstellen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>490</x>
+      <y>480</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Wirkung der Massnahmen
+berechnen &amp; darstellen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>490</x>
+      <y>410</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>CPmax Szenario berechnen 
+und darstellen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>290</x>
+      <y>350</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Parzellen erfassen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>520</x>
+      <y>210</y>
+      <w>220</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Grundlagendaten 
+für Untersuchungsgebiet
+importieren
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>520</x>
+      <y>280</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Bodenabtragspotenzial 
+darstellen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Actor</type>
+    <coordinates>
+      <x>160</x>
+      <y>310</y>
+      <w>120</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Erosionsberater</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

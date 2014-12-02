@@ -1,0 +1,247 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+'''
+# MODULE:   r.soilloss.stats
+#
+# AUTHOR(S):  Martin Zbinden
+#
+# PURPOSE:  Multiplicate soilloss on bare soil with C- and P-factors
+#           to receive soilloss for bare soil.
+#
+#           #@return soillossgrow raster map
+#
+#
+# VERSION:  0.1
+#
+# DATE:     So Jun 8 14:00:00 CET 2014
+#
+'''
+#%Module
+#%  description: Calculate soilloss t/(ha*a) for grown soil. Instead of input raster maps constant values can also be given.
+#%    keywords: Raster, hydrology, landcover, erosion
+#%end
+
+#%option G_OPT_R_INPUT
+#%key: inraster
+#%description: Input raster map
+#%end
+
+#%option
+#%  key: colorschema
+#%  key_desc: name
+#%  description: Module for flowaccumulation calculation
+#%  options: soillossbare3, soillossbare9
+#%  answer: soillossbare
+#%  required: yes
+#%  multiple:no
+#%end
+
+#%option G_OPT_R_OUTPUT
+#%key: outraster
+#%description: Output raster map
+#%default
+#%end
+
+#color shemes
+classrules = {  'soillossbare9' : {},
+                'soillossbare3' : {},
+                'soillossgrow9' : {},
+                'cfactor6' : {},
+                'kfactor6' : {}                
+                }
+
+
+colorrules = {  'soillossbare9': {},
+                'soillossbare3': {},
+                'soillossbare' : {},
+                'soillossgrow9' : {},
+                'soillossgrow' : {},
+                'cfactor6' : {},
+                'cfactor' : {},
+                'kfactor6' : {},
+                'kfactor' : {}
+                }
+                
+# (c) Gisler 2010                       
+classrules['soillossbare9'] =  '\n '.join([
+    "0 thru 20 = 1 < 20",
+    "20 thru 30 = 2 20 - 30",
+    "30 thru 40 = 3 30 - 40",
+    "40 thru 55 = 4 40 - 55",
+    "55 thru 100 = 5 55 - 100",
+    "100 thru 150 = 6 100 - 150",
+    "150 thru 250 = 7 150 - 250",
+    "250 thru 500 = 8 250 - 500",
+    "500 thru 50000 = 9 > 500",
+    ])
+
+# (c) Gisler 2010       
+classrules['soillossbare3'] =  '\n '.join([
+    "0 thru 30 = 1 keine Gefährdung",
+    "30 thru 55 = 2 Gefährdung",
+    "55 thru 50000 = 3  grosse Gefährdung",
+    ])
+
+# (c) BLW 2011
+colorrules['soillossbare9'] = '\n '.join([
+    "1    0:102:0",
+    "2   51:153:0",
+    "3   204:255:0",
+    "4  255:255:0",
+    "5   255:102:0",
+    "6  255:0:0",
+    "7  204:0:0",
+    "8  153:0:0",
+    "9  102:0:0",
+    ])
+
+# (c) BLW 2011
+colorrules['soillossbare3'] = '\n '.join([
+    "1   51:153:0",
+    "2  255:255:0",
+    "3  255:0:0"
+    ])
+
+# (c) BLW 2011
+colorrules['soillossbare'] = '\n '.join([
+    "0    0:102:0",
+    "20   51:153:0",
+    "30   204:255:0",
+    "40  255:255:0",
+    "55   255:102:0",
+    "100  255:0:0",
+    "150  204:0:0",
+    "250  153:0:0",
+    "500  102:0:0",
+    ])
+
+# (c) Gisler 2010       
+colorrules['soillossgrow9'] = '\n '.join([
+    "1   69:117:183",
+    "2  115:146:185",
+    "3  163:179:189",
+    "4  208:216:193",
+    "5  255:255:190",
+    "6  252:202:146",
+    "7  245:153:106",
+    "8  233:100:70",
+    "9  213:47:39"
+    ])
+    
+# (c) Gisler 2010    
+colorrules['soillossgrow9'] = '\n '.join([
+    "1   69:117:183",
+    "2  115:146:185",
+    "3  163:179:189",
+    "4  208:216:193",
+    "5  255:255:190",
+    "6  252:202:146",
+    "7  245:153:106",
+    "8  233:100:70",
+    "9  213:47:39"
+    ])
+
+# (c) Gisler 2010    
+colorrules['soillossgrow3'] = '\n '.join([
+    "1   69:117:183",
+    "2  163:179:189",
+    "3  208:216:193",
+    "4  245:153:106"
+    ])
+ 
+# (c) Gisler 2010   
+colorrules['soillossgrow'] = '\n '.join([
+    "0   69:117:183",
+    "1  115:146:185",
+    "2  163:179:189",
+    "4  208:216:193",
+    "7.5  255:255:190",
+    "10  252:202:146",
+    "15  245:153:106",
+    "20  233:100:70",
+    "30  213:47:39"
+    ])
+    
+# (c) Gisler 2010   
+classrules['soillossgrow9'] = '\n '.join([
+    "0 thru 1 = 1 < 1 ",
+    "1 thru 2 = 2 1 - 2 ",
+    "2 thru 4 = 3 2 - 4 ",
+    "4 thru 7.5 = 4 4 - 7.5",
+    "7.5 thru 10 = 5 7.5 - 10",
+    "10 thru 15 = 6 10 - 15",
+    "15 thru 20 = 7 15 - 20",
+    "20 thru 30 = 8  20 - 30",
+    "30 thru 5000 = 9  > 30"
+    ])
+
+# (c) Gisler 2010   
+classrules['soillossgrow3'] = '\n '.join([
+    "0 thru 2 = 1 Toleranz mittelgründige Böden",
+    "2 thru 4 = 2 Toleranz tiefgründige Böden",
+    "4 thru 7.5 = 3 leichte Überschreitung",
+    "7.5 thru 5000 = 4 starke Überschreitung"
+    ])
+
+
+
+# Gisler 2010
+colorrules['cfactor6']  = '\n '.join([
+    "1  56:145:37",
+    "2  128:190:91",
+    "3  210:233:153",
+    "4  250:203:147",
+    "5  225:113:76",
+    "6  186:20:20"
+    ])
+    
+# Gisler 2010
+colorrules['cfactor']  = '\n '.join([
+    "0.00  56:145:37",
+    "0.01  128:190:91",
+    "0.05  210:233:153",
+    "0.1  250:203:147",
+    "0.15  225:113:76",
+    "0.2  186:20:20"
+    ])
+    
+# (c) Gisler 2010
+classrules['kfactor5'] = '\n '.join([
+    "0 thru 0.20 = 1 < 0.20",
+    "0.20 thru 0.25 = 2 0.20 - 0.25",
+    "0.25 thru 0.30 = 3 0.25 - 0.3",
+    "0.3  thru 0.35 = 4 0.3 - 0.35",
+    "0.35 thru 1 = 5 > 0.30"
+    ])
+
+# (c) Gisler 2010
+colorrules['kfactor6'] = '\n '.join([
+    "1  15:70:15",
+    "2  98:131:52",
+    "3  204:204:104",
+    "4  151:101:50",
+    "5  98:21:15"
+    ])
+    
+# (c) Gisler 2010
+colorrules['kfactor'] = '\n '.join([
+    "0.00  15:70:15",
+    "0.20  98:131:52",
+    "0.25  204:204:104",
+    "0.30  151:101:50",
+    "0.35  98:21:15"
+    ])
+    
+# own definitions
+colorrules['cpmax'] = '\n '.join([
+        "0.01  102:0:0",
+        "0.01  153:0:0",
+        "0.02  204:0:0",
+        "0.04  255:0:0",
+        "0.06   255:102:0",
+        "0.08   255:255:0",
+        "0.10  204:255:0",
+        "0.12   51:153:0",
+        "0.15    0:102:0",
+        "1000.00    0:102:0"
+        ])

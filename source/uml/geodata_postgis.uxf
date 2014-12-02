@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.custom.PackageAggregationHierarchy</type>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>310</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>PostgreSQL/POSTGIS 
+	[Datenbank
+		[Schema]
+			[Tabelle]
+	cheros
+		tileindex
+			ch_blw_erk2_erosz
+			ch_swisstopo_pk25
+			...
+		ch_blw
+			feldblockkarte
+		parcels
+			regions
+			parcels
+			measures</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

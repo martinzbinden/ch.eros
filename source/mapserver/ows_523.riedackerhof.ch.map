@@ -1,0 +1,62 @@
+
+MAP
+    WEB
+        METADATA
+            "ows_title"                     "private mapserver"
+            "ows_label"                     "private mapserver"
+            "ows_abstract"                  "Mapserver for Bachelor thesis project"
+            "ows_keywordlist"               "gis erosion BLW"
+            "ows_onlineresource"            "https://523.riedackerhof.ch:4433/ows?"
+            "ows_contactorganization"       "BFH HAFL Zollikofen"
+            "ows_contactperson"             "martin.zbinden@gmail.com"
+            "ows_srs"                       "epsg:21781 epsg:2056"  ##recommended
+            "ows_enable_request"            "* !GetCapabilities !DescribeCoverage"
+        END ## Metadata
+    END ## Web
+
+    NAME        "mapserv"
+    #CONFIG      "MS_ERRORFILE" "/var/log/mapserv_error.log"
+    PROJECTION
+        "init=epsg:21781"
+    END
+    EXTENT      480000 74000 838750 296000
+    SHAPEPATH   "/gis/geodata/"
+
+    # hilite map for GetFeatureInfo "info_format=text/html" requests
+    QUERYMAP
+        STATUS ON
+        SIZE 200 200
+        STYLE HILITE
+        COLOR 255 255 0
+    END
+    OUTPUTFORMAT
+        NAME GTiff
+        DRIVER "GDAL/GTiff"
+        MIMETYPE "image/tiff"
+        IMAGEMODE RGB
+    EXTENSION "tif"
+    END
+    OUTPUTFORMAT
+        NAME GEOTIFF_FLOAT32
+        DRIVER "GDAL/GTiff"
+        TRANSPARENT OFF
+        MIMETYPE "image/tiff"
+        IMAGEMODE FLOAT32
+        EXTENSION "tif"
+    END
+    OUTPUTFORMAT
+        NAME GEOTIFF_INT8
+        DRIVER "GDAL/GTiff"
+        TRANSPARENT ON
+        MIMETYPE "image/tiff"
+        IMAGEMODE BYTE
+        EXTENSION "tif"
+    END
+
+
+INCLUDE     "swisstopo.map"
+INCLUDE     "blw.map"
+
+END #Map file
+
+

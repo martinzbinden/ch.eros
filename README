@@ -1,0 +1,15 @@
+Data for BTh "Fachprogramm Erosionsberatung" (Zbinden 2014)
+============================================
+
+==CONTENTS== 
+source/			source code
+source/grass-addons	GRASS GIS addons
+source/qgis		QGIS files (configuration file, template)
+source/uml/		UML diagrams (.uxl Umlet)
+doc/latex_poster	LaTeX-Code BTh poster
+doc/latex_report	LaTeX-Code BTh report
+doc/*			various documentation files
+
+==HELP==
+If your are interested in developping further this app, you welcome to contact martin.zbinden(at)gmail(dot)com
+

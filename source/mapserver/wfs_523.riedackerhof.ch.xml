@@ -1,0 +1,69 @@
+<tinyows online_resource="https://523.riedackerhof.ch:4433/wfs"
+         schema_dir="/usr/share/tinyows/schema/"
+         check_schema = "0"
+	 estimated_extent = "1"
+         log="/tmp/tinyows.log"
+	 expose_pk="0"
+         log_level="7" >
+
+<pg host="localhost" user="gis" password="gisHoch3" dbname="gis" port="5432"/>
+
+<metadata name="TinyOWS Server"
+          title="TinyOWS Server - Fachprogramm Erosionsberatung" />
+
+<contact name="Martin Zbinden"
+         site="https://523.riedackerhof.ch:4433"
+         email="martin.zbinden@gmail.com" />
+
+<layer retrievable="1"
+       writable="1"
+       ns_prefix="tows"
+       ns_uri="http://www.tinyows.org"
+       schema="public"
+       name="ebk_betrieb"
+       title="Betriebe" />
+
+<layer retrievable="1"
+       writable="1"
+       ns_prefix="tows"
+       ns_uri="http://www.tinyows.org"
+       schema="public"
+       name="ebk_parzellenplan"
+       title="Parzellenplan" />
+
+<layer retrievable="1"
+       writable="1"
+       ns_prefix="tows"
+       ns_uri="http://www.tinyows.org"
+       name="ebk_massnahmenplan"
+       title="Massnahmenplan" />
+
+<layer retrievable="1"
+       writable="0"
+       ns_prefix="tows"
+       ns_uri="http://www.tinyows.org"
+       name="ch_blw_erk2_feldblockkarte"
+       title="Feldblockkarte" />
+
+<layer retrievable="1"
+       writable="0"
+       ns_prefix="tows"
+       ns_uri="http://www.tinyows.org"
+       name="ch_swisstopo_kantone"
+       title="Kantonsgrenzen" />
+
+<layer retrievable="1"
+       writable="0"
+       ns_prefix="tows"
+       ns_uri="http://www.tinyows.org"
+       name="ch_swisstopo_gemeinden"
+       title="Gemeindegrenzen" />
+
+<layer retrievable="1"
+       writable="0"
+       ns_prefix="tows"
+       ns_uri="http://www.tinyows.org"
+       name="ch_gelan_kulturen_2014"
+       title="Kulturflächen 2014 provisorisch" />
+</tinyows>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.custom.PackageAggregationHierarchy</type>
+    <coordinates>
+      <x>50</x>
+      <y>110</y>
+      <w>310</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>geodata
+	[Ordner]
+		[Unterordner]
+	ch.blw.erk2.erosz
+		eros_z_233.tif
+		eros_z_233.tif.ovr
+		...
+	ch.blw.erk2.r
+	ch.blw.erk2.k
+	ch.blw.erk2.feldblockkarte
+	ch.swisstopo.swissalti3d
+	ch.swisstopo.swissimage.2007
+	ch.swisstopo.pk25</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

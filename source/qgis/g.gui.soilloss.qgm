@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE qgisgrassmodule SYSTEM "http://mrcc.com/qgisgrassmodule.dtd">
+ <qgisgrassmodule label="Fachprogramm Erosion CH" module="g.gui.soilloss">
+        <option key="betriebid" answer="" />
+        <option key="task" answer="soilloss.grow" />
+        <option key="output" answer="output" />
+
+	<option key="maxsoilloss" advanced="yes" answer="4"/>
+        <flag key="b" advanced="yes" answer="off"/>
+        <flag key="s" advanced="yes" answer="on"/>
+        <flag key="i" advanced="yes" answer="off"/>
+        <flag key="c" hidden="yes" advanced="yes" answer="off"/>
+        <flag key="v" advanced="yes" answer="off"/>
+        <flag key="o" advanced="yes" answer="off"/>
+
+
+        <option key="configuration" advanced="yes"/>
+        <option key="username" advanced="yes" answer="" />
+        <option key="password" advanced="yes" answer="" />
+ </qgisgrassmodule>

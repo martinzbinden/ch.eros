@@ -1,0 +1,375 @@
+MAP
+    NAME "mapserv"
+    CONFIG "MS_ERRORFILE" "/var/log/mapserv/mapserv_error.log"
+    PROJECTION
+        "init=epsg:21781"
+    END
+
+    SHAPEPATH "/gis/geodata/"
+
+    WEB
+        METADATA
+            "ows_title"                     "mywms"
+            "ows_abstract"                  "Mapserver for ERK2+ project (BTh)"
+            "ows_keywordlist"               "gis erosion BLW"
+            "ows_onlineresource"            "http://523.riedackerhof.ch:7980/mapserv_test?"
+            "ows_service_onlineresource"    "http://523.riedackerhof.ch:7980/mapserv_test?"
+            #"ows_service_onlineresource"   "http://localhost/mapserv?"
+            "ows_contactorganization"       "BFH HAFL Zollikofen"
+            "ows_contactperson"             "martin.zbinden@gmail.com"
+            "ows_srs"                       "epsg:21781"  ##recommended
+            "ows_enable_request"            "* !GetCapabilities !GetLegendGraphic"
+        END ## Metadata
+    END ## Web
+
+
+    OUTPUTFORMAT
+        NAME GEOTIFF_FLOAT32
+        DRIVER "GDAL/GTiff"
+        TRANSPARENT ON
+        MIMETYPE "image/tiff"
+        IMAGEMODE FLOAT32
+        EXTENSION "tif"
+    END
+    OUTPUTFORMAT
+        NAME GEOTIFF_INT8
+        DRIVER "GDAL/GTiff"
+        TRANSPARENT ON
+        MIMETYPE "image/tiff"
+        IMAGEMODE BYTE
+        EXTENSION "tif"
+    END
+
+
+LAYER
+    name            tindex.pk25
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+#   CONNECTIONTYPE  OGR
+#   CONNECTION      "tileindex.sqlite"
+    DATA            "wkb_geometry from ch_swisstopo_pk25 using unique ogc_fid using srid=21781"
+END
+
+LAYER
+    NAME            ch.swisstopo.pk25
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       tindex.pk25
+    METADATA
+        "ows_title"             "ch.swisstopo.pk25"
+        "ows_label"             "ch.swisstopo.pk25"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        "1.25 1.25"
+        "ows_enable_request"    "*"
+    END
+END
+
+
+LAYER
+    name            tindex.swissimage
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA            "wkb_geometry from tindex.ch_swisstopo_swissimage_2007"
+END
+LAYER
+    NAME            ch.swisstopo.swissimage.2007
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       "tindex.swissimage"
+    METADATA
+        "ows_title"             "ch.swisstopo.swissimage.2007"
+        "ows_label"             "ch.swisstopo.swissimage.2007"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        ".5 .5"
+        "ows_enable_request"    "*"
+    END
+END
+
+LAYER
+    name            tindex.swissalti3d
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA            "wkb_geometry from tindex.ch_swisstopo_swissalti3d using unique ogc_fid using srid=21781"
+END
+LAYER
+    NAME            ch.swisstopo.swissalti3d
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       "tindex.swissalti3d"
+    TEMPLATE        "default"
+    METADATA
+        "ows_title"             "ch.swisstopo.swissalti3d"
+        "ows_label"             "ch.swisstopo.swissalti3d"
+        #"wms_opaque"            "1"
+        "ows_extent"            "480000 74000  838750 296000"
+        "ows_resolution"        "2 2"
+        "wcs_enable_request"    "*"
+        "gml_include_items"     "value_0"
+        "gml_groups"            "meters"
+        "gml_meters_group"      "value_0"
+    END
+END
+
+LAYER
+    name tindex.swissalti3d.hillshade
+    TYPE polygon
+    STATUS OFF
+    CONNECTIONTYPE POSTGIS
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    CONNECTION "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA "wkb_geometry from tindex.ch_swisstopo_swissalti3d_hillshade using unique ogc_fid using srid=21781"
+    END
+LAYER
+    NAME    ch.swisstopo.swissalti3d.hillshade
+    TYPE    RASTER
+    STATUS  ON
+    TILEINDEX "tindex.swissalti3d.hillshade"
+    METADATA
+        "ows_label"                 "ch.swisstopo.swissalti3d.hillshade"  ### required
+        "ows_title"                 "ch.swisstopo.swissalti3d.hillshade"  ### required
+        "ows_extent"                "480000 74000  838750 296000"
+        "ows_resolution"            "2 2"
+        "ows_enable_request"        "*"
+        END
+    END
+
+LAYER
+    name            tindex.ch.blw.erk2.erosz
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA            "wkb_geometry from tindex.ch_blw_erk2_erosz using unique ogc_fid using srid=21781"
+END
+
+LAYER
+    NAME            "croparea"
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    CONNECTION "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA "geom from vector.blw_feldblockkarte_besofr_croparea using srid=21781"
+    METADATA
+        "ows_title"                 "ch.blw.feldblockkarte.besofr_croparea"
+        "ows_label"                 "ch.blw.feldblockkarte.besofr_croparea"
+        "ows_extent"                "480000 74000  838750 296000"
+        "ows_resolution"            "2 2"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "ows_enable_request"           "*"
+
+    END
+    CLASS
+        #expression ("[FIPS]" = "EZ")
+            style
+                color 255 0 0
+            end
+    END
+END
+
+LAYER
+    NAME        "ch.blw.erk2.erosz"
+    TYPE        RASTER
+    STATUS      ON
+    TEMPLATE    "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.erosz"
+        "ows_label"                 "ch.blw.erk2.erosz"
+        "ows_resolution"            "2 2"
+        "ows_extent"                "480000 74000  838750 296000"
+        "wcs_rangeset_nullvalue"    "-1"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "ows_enable_request"        "*"
+        "gml_include_items"         "value_0"
+        #"wms_style"                 "erosz"
+        #"wms_style_erosz_legendurl_format"  "png"
+        #"wms_style_erosz_legendurl_height"  "214"
+        #"wms_style_erosz_legendurl_width"   "104"
+        #"wms_style_erosz_legendurl_href"    "ch.blw.erosion-quantitativ_de_legend.png"
+    END
+    TILEINDEX   "tindex.ch.blw.erk2.erosz"
+    CLASS
+        EXPRESSION ([pixel] >= 0 AND [pixel] < 20)
+        STYLE
+        COLOR 37 114 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 20 AND [pixel] < 30)
+        STYLE
+        COLOR 88 169 1
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 30 AND [pixel] < 40)
+        STYLE
+        COLOR 207 229 3
+        END
+    END
+
+    CLASS
+        EXPRESSION ([pixel] >= 40 AND [pixel] < 55)
+        STYLE
+        COLOR 254 254 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 55 AND [pixel] < 100)
+        STYLE
+        COLOR 240 60 1
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 100 AND [pixel] < 250)
+        STYLE
+        COLOR 169 0 1
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 250 AND [pixel] < 500)
+        STYLE
+        COLOR 115 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 500 AND [pixel] < 50000)
+        STYLE
+        COLOR 87 0 0
+        END
+    END
+END
+
+LAYER
+    NAME        "ch.blw.erk2.erosz_croparea"
+    TYPE        RASTER
+    STATUS      ON
+    TILEINDEX   "tindex.ch.blw.erk2.erosz"
+    TEMPLATE    "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.erosz_croparea"
+        "ows_label"                 "ch.blw.erk2.erosz_croparea"
+        "ows_extent"                "480000 74000  838750 296000"
+        "ows_resolution"            "2 2"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "ows_enable_request"        "*"
+    END
+    MASK    "croparea"
+    CLASS
+        EXPRESSION ([pixel] >= 0 AND [pixel] < 20)
+        STYLE
+        COLOR 37 114 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 20 AND [pixel] < 30)
+        STYLE
+        COLOR 88 169 1
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 30 AND [pixel] < 40)
+        STYLE
+        COLOR 207 229 3
+        END
+    END
+
+    CLASS
+        EXPRESSION ([pixel] >= 40 AND [pixel] < 55)
+        STYLE
+        COLOR 254 254 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 55 AND [pixel] < 100)
+        STYLE
+        COLOR 240 60 1
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 100 AND [pixel] < 250)
+        STYLE
+        COLOR 169 0 1
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 250 AND [pixel] < 500)
+        STYLE
+        COLOR 115 0 0
+        END
+    END
+    CLASS
+        EXPRESSION ([pixel] >= 500 AND [pixel] < 50000)
+        STYLE
+        COLOR 87 0 0
+        END
+    END
+END
+
+LAYER
+    name tindex.ch.blw.erk2.r
+    TYPE polygon
+    STATUS OFF
+    CONNECTIONTYPE POSTGIS
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    CONNECTION "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA "wkb_geometry from tindex.ch_blw_erk2_r using unique ogc_fid using srid=21781"
+END
+LAYER
+    NAME            "ch.blw.erk2.r"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       "tindex.ch.blw.erk2.r"
+    TEMPLATE        "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.r"
+        "ows_label"                 "ch.blw.erk2.r"
+        "ows_extent"                "480000 74000  838750 296000"
+        "ows_resolution"            "2 2"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "ows_enable_request"        "*"
+    END
+END
+
+LAYER
+    name            tindex.ch.blw.erk2.k
+    TYPE            POLYGON
+    STATUS          OFF
+    CONNECTIONTYPE  POSTGIS
+    PROCESSING      "CLOSE_CONNECTION=DEFER"
+    CONNECTION      "host=localhost port=5432 dbname='gis' user='mapserv' password='mapmap'"
+    DATA            "wkb_geometry from tindex.ch_blw_erk2_k using unique ogc_fid using srid=21781"
+END
+LAYER
+    NAME            "ch.blw.erk2.k"
+    TYPE            RASTER
+    STATUS          ON
+    TILEINDEX       "tindex.ch.blw.erk2.k"
+    TEMPLATE        "default"
+    METADATA
+        "ows_title"                 "ch.blw.erk2.k"
+        "ows_label"                 "ch.blw.erk2.k"
+        "ows_extent"                "480000 74000  838750 296000"
+        "ows_resolution"            "2 2"
+        "wcs_formats"               "GEOTIFF_FLOAT32"
+        "wcs_rangeset_nullvalue"    "-9999"
+        "ows_enable_request"        "*"
+    END
+END #Layer
+
+
+
+END #Map file
+
+
